@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="org.suffers.aag.demo.LoginController"
+            stylesheets="@css/style.css"
+            style="-fx-background-color: #f8f9fa;">
+
+    <center>
+        <VBox alignment="CENTER" spacing="20" style="-fx-padding: 40;">
+            <Label text="Вход в систему" styleClass="login-header">
+                <padding>
+                    <Insets bottom="20"/>
+                </padding>
+            </Label>
+
+            <GridPane hgap="15" vgap="15" alignment="CENTER">
+                <columnConstraints>
+                    <ColumnConstraints minWidth="100" halignment="RIGHT"/>
+                    <ColumnConstraints minWidth="200" hgrow="ALWAYS"/>
+                </columnConstraints>
+
+                <Label text="Email:" styleClass="login-label"
+                       GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                <TextField fx:id="emailIdField" styleClass="login-field"
+                           GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+                <Label text="Пароль:" styleClass="login-label"
+                       GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                <PasswordField fx:id="passwordField" styleClass="login-field"
+                               GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+            </GridPane>
+
+            <Button fx:id="submitButton" text="Войти" styleClass="dialog-button"
+                    onAction="#login" defaultButton="true">
+                <graphic>
+                    <ImageView fitWidth="16" fitHeight="16">
+                        <Image url="@icons/login.png"/>
+                    </ImageView>
+                </graphic>
+            </Button>
+        </VBox>
+    </center>
+
+    <bottom>
+        <HBox alignment="CENTER_RIGHT" style="-fx-padding: 10 20 10 10;">
+            <Label text="Task Manager v1.0" styleClass="footer-text"/>
+        </HBox>
+    </bottom>
+</BorderPane>

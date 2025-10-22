@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.*?>
+
+
+<BorderPane xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="org.suffers.aag.demo.OwnerController"
+            stylesheets="@css/style.css">
+
+    <top>
+        <ToolBar style="-fx-background-color: #f8f9fa; -fx-padding: 5;">
+            <items>
+                <Button onAction="#createNewTask" styleClass="icon-button">
+                    <graphic>
+                        <ImageView fitWidth="16" fitHeight="16">
+                            <Image url="@icons/create_task.png"/>
+                        </ImageView>
+                    </graphic>
+                    <tooltip><Tooltip text="Создать новую задачу"/></tooltip>
+                </Button>
+
+                <Button onAction="#createNewUser" styleClass="icon-button">
+                    <graphic>
+                        <ImageView fitWidth="16" fitHeight="16">
+                            <Image url="@icons/create_user.png"/>
+                        </ImageView>
+                    </graphic>
+                    <tooltip><Tooltip text="Добавить нового пользователя"/></tooltip>
+                </Button>
+
+                <Separator orientation="VERTICAL" style="-fx-padding: 0 5;"/>
+
+                <Button text="Сохранить" onAction="#saveAllChanges" styleClass="save-button"/>
+            </items>
+        </ToolBar>
+    </top>
+
+    <center>
+        <ScrollPane styleClass="modern-scroll" fitToWidth="true" fitToHeight="true"
+                    HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+            <TableView fx:id="tasksTable" editable="true" styleClass="minimal-table">
+                <columns>
+                    <TableColumn text="Название" fx:id="titleColumn" prefWidth="150"/>
+                    <TableColumn text="Описание" fx:id="descriptionColumn" prefWidth="250"/>
+                    <TableColumn text="Статус" fx:id="statusColumn" prefWidth="100"/>
+                    <TableColumn text="Создатель" fx:id="creatorColumn" prefWidth="120"/>
+                    <TableColumn text="Исполнитель" fx:id="assigneeColumn" prefWidth="120"/>
+                    <TableColumn text="Дата создания" fx:id="createdAtColumn" prefWidth="140"/>
+                    <TableColumn text="Крайний срок" fx:id="deadlineColumn" prefWidth="340"/>
+                </columns>
+            </TableView>
+        </ScrollPane>
+    </center>
+
+    <bottom>
+        <VBox style="-fx-background-color: #f8f9fa; -fx-padding: 10;" spacing="10">
+            <VBox spacing="5">
+                <Label text="Управление задачей:" styleClass="section-label"/>
+                <ToolBar style="-fx-background-color: transparent; -fx-padding: 5 0;">
+                    <items>
+                        <HBox spacing="15" alignment="CENTER_LEFT">
+                            <HBox spacing="15" alignment="CENTER_LEFT">
+                                <VBox spacing="2" alignment="CENTER">
+                                    <Button onAction="#openTask" styleClass="icon-button">
+                                        <graphic>
+                                            <ImageView fitWidth="16" fitHeight="16">
+                                                <Image url="@icons/open.png"/>
+                                            </ImageView>
+                                        </graphic>
+                                    </Button>
+                                    <Label text="Открыть" styleClass="button-caption"/>
+                                </VBox>
+
+                                <VBox spacing="2" alignment="CENTER">
+                                    <Button onAction="#closeTask" styleClass="icon-button">
+                                        <graphic>
+                                            <ImageView fitWidth="16" fitHeight="16">
+                                                <Image url="@icons/close.png"/>
+                                            </ImageView>
+                                        </graphic>
+                                    </Button>
+                                    <Label text="Закрыть" styleClass="button-caption"/>
+                                </VBox>
+
+                                <Separator orientation="VERTICAL" style="-fx-padding: 0 5;"/>
+
+
+                            </HBox>
+                            <Region HBox.hgrow="ALWAYS"/>
+
+                            <VBox spacing="2" alignment="BOTTOM_RIGHT">
+                                <Button onAction="#showArchivedTasks" styleClass="icon-button">
+                                    <graphic>
+                                        <ImageView fitWidth="16" fitHeight="16">
+                                            <Image url="@icons/archive.png"/>
+                                        </ImageView>
+                                    </graphic>
+                                </Button>
+                                <Label text="Архив" styleClass="button-caption"/>
+                            </VBox>
+                        </HBox>
+                    </items>
+                </ToolBar>
+            </VBox>
+
+            <Separator style="-fx-padding: 5 0;"/>
+
+            <VBox spacing="5">
+                <Label text="Управление администраторами:" styleClass="section-label"/>
+                <ToolBar style="-fx-background-color: transparent; -fx-padding: 5 0;">
+                    <items>
+                        <HBox spacing="15" alignment="CENTER_LEFT">
+                            <HBox spacing="15" alignment="CENTER_LEFT">
+
+                                <VBox spacing="2" alignment="CENTER">
+                                    <ComboBox fx:id="assigneeComboBox" promptText="Исполнитель" styleClass="bottom-panel-combo"/>
+                                    <Label text="Выбрать исполнителя" styleClass="combo-caption"/>
+                                </VBox>
+
+                                <VBox spacing="2" alignment="CENTER">
+                                    <ComboBox fx:id="adminComboBox" promptText="Администратор" styleClass="bottom-panel-combo"/>
+                                    <Label text="Выбрать администратора" styleClass="combo-caption"/>
+                                </VBox>
+
+                                <VBox spacing="2" alignment="CENTER">
+                                    <Button onAction="#assignDeveloperToAdmin" styleClass="icon-button">
+                                        <graphic>
+                                            <ImageView fitWidth="16" fitHeight="16">
+                                                <Image url="@icons/link.png"/>
+                                            </ImageView>
+                                        </graphic>
+                                    </Button>
+                                    <Label text="Назначить связь" styleClass="button-caption"/>
+                                </VBox>
+
+                                <VBox spacing="2" alignment="CENTER">
+                                    <ComboBox fx:id="adminActionComboBox" promptText="Пользователь" styleClass="bottom-panel-combo"/>
+                                    <Label text="Выбрать пользователя" styleClass="combo-caption"/>
+                                </VBox>
+
+                                <VBox spacing="2" alignment="CENTER">
+                                    <Button onAction="#assignAdmin" styleClass="icon-button">
+                                        <graphic>
+                                            <ImageView fitWidth="16" fitHeight="16">
+                                                <Image url="@icons/assign.png"/>
+                                            </ImageView>
+                                        </graphic>
+                                    </Button>
+                                    <Label text="Назначить" styleClass="button-caption"/>
+                                </VBox>
+
+                                <VBox spacing="2" alignment="CENTER">
+                                    <Button onAction="#revokeAdmin" styleClass="icon-button">
+                                        <graphic>
+                                            <ImageView fitWidth="16" fitHeight="16">
+                                                <Image url="@icons/remove.png"/>
+                                            </ImageView>
+                                        </graphic>
+                                    </Button>
+                                    <Label text="Снять" styleClass="button-caption"/>
+                                </VBox>
+
+                            </HBox>
+                        </HBox>
+                    </items>
+                </ToolBar>
+            </VBox>
+        </VBox>
+    </bottom>
+</BorderPane>
